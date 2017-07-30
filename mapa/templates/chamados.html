@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container">
 	<div class="fechar" onclick="fechar()">
 		<i class="close material-icons">close</i>Fechar
@@ -52,3 +53,36 @@
     });
 
 </script>
+=======
+<div class="container">
+    <div class="fechar" onclick="fechar()">
+        <i class="close material-icons">close</i>Fechar
+    </div>
+    <h1>Bairros</h1>
+
+
+    <div class="row">
+        {% for i in pontos %}
+            <div class="col s4">
+                <div class="card">
+
+                    <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4 center-align total">
+                                    <h5 style="text-transform: uppercase!important;" class="truncate">{{ i.titulo }}</h4>
+
+                        <p class="rodape-box">
+                            <a class="waves-effect waves-light btn red darken-2 bt-rdp total"><i class="material-icons left">error_outline</i>Emitir Alerta!</a>
+                        </p>
+                    </div>
+                    <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">{{ i.titulo }}<i
+                                    class="material-icons right">close</i></span>
+
+                        <p class="content-ocorrencia">{{ i.denuncia }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+>>>>>>> 0c251be76fdad02a249315dfbd2a76765eab5913
