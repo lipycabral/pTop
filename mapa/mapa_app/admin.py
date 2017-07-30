@@ -10,12 +10,20 @@ class Mensagemadmin(admin.ModelAdmin):
     list_display = ['datamensagem', 'mensagem', 'resposta']
     list_filter = ['resposta',]
 class Localadmin(admin.ModelAdmin):
-        list_display = ['titulo']
-
-
+    list_display = ['titulo']
+class AbrigoAdmin(admin.ModelAdmin):
+    list_display = ['titulo','cep','espaco']
 class CadastroAdmin(admin.ModelAdmin):
     list_display = ['nome']
+class VoluntarioAdmin(admin.ModelAdmin):
+    list_display = ['volunt','cpf','cep','numero','ajuda']
+class AbrigadoAdmin(admin.ModelAdmin):
+    list_display = ['abrigado','necessidade','quantidade']
+
 admin.site.register(Local, Localadmin)
 admin.site.register(Cadastro, CadastroAdmin)
 # admin.site.register(Usuario, Usuarioadmin)
 admin.site.register(Mensagem, Mensagemadmin)
+admin.site.register(Abrigo, AbrigoAdmin)
+admin.site.register(Voluntario, VoluntarioAdmin)
+admin.site.register(Abrigado, AbrigadoAdmin)

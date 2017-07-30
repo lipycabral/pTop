@@ -106,3 +106,8 @@ def login_app(request):
         return HttpResponse(u'Por favor, insira um usuário e senha corretos.')
 
 
+@login_required
+def cad_abrigo(request):
+    abrigos = Abrigo.objects.all()
+    email = hashlib.md5(request.user.email.encode('utf-8')).hexdigest()
+    return render(request, 'cad_abrigos.html', locals())

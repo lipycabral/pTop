@@ -112,3 +112,7 @@
 .total{
     with: 100% !important;
 }
+.botao-clean{
+    background: transparent !important;
+    border: 1px solid #fff;
+}
