@@ -1,36 +1,54 @@
 <div class="container">
-    <div class="fechar" onclick="fechar()">
-        <i class="close material-icons">close</i>Fechar
-    </div>
-    <h1>Chamados</h1>
+	<div class="fechar" onclick="fechar()">
+		<i class="close material-icons">close</i>Fechar
+	</div>
+	<h1>Bairros</h1>
 
-    <p>Aqui estão listadas as últimas ocorrências registradas através do Aplicativo Mobilize</p>
 
-    <div class="row">
-        {% for i in pontos %}
-            <div class="col s4">
-                <div class="card">
+	<div class="row">
+		{% for i in pontos %}
+			<div class="col s4">
+				<div class="card">
 
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img src='data:image/jpeg;base64,{{ i.imagem }}'>
-                    </div>
-                    <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">Tipo - <strong>{{ i.titulo }}</strong><i
-                                    class="material-icons right">more_vert</i></span>
+					<div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4 center-align total">
+                                    <h5 style="text-transform: uppercase!important;"
+                                        class="truncate">{{ i.titulo }}</h4>
 
-                        <p class="rodape-box">
-                            <a class="waves-effect waves-light btn bt-rdp">Detalhes</a>
-                            <a class="waves-effect waves-light btn red darken-2 bt-rdp">Deletar</a>
-                        </p>
-                    </div>
-                    <div class="card-reveal">
+
+
+	                                    {% if ultimo.nivel > i.altura %}
+		                                    <p class="rodape-box">
+                                                <a class="waves-effect waves-light btn red darken-2 bt-rdp total"><i
+		                                                class="material-icons left">error_outline</i>Emitir Alerta!</a>
+                                            </p>
+	                                    {% else %}
+		                                    <p class="rodape-box">
+                                                <a class="waves-effect waves-light btn red darken-2 bt-rdp total disabled"><i
+		                                                class="material-icons left">error_outline</i>Emitir Alerta!</a>
+                                            </p>
+	                                    {% endif %}
+
+					</div>
+					<div class="card-reveal">
                             <span class="card-title grey-text text-darken-4">{{ i.titulo }}<i
-                                    class="material-icons right">close</i></span>
+		                            class="material-icons right">close</i></span>
 
-                        <p class="content-ocorrencia">{{ i.denuncia }}</p>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+						<p class="content-ocorrencia">{{ i.denuncia }}</p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 </div>
+
+
+<script>
+    $(document).ready(function () {
+
+        $(".total").click(function () {
+            alert("Alerta emitido para todos do bairro ");
+        });
+    });
+
+</script>

@@ -14,13 +14,11 @@
 
     {#  verifica se está na pagina inicial#}
     {% if request.path == "/" %}
-        <li><a class="waves-effect" href="#!" id="vizualizar_chamado"><i class="material-icons">person_pin</i>Vizualizar
-            chamados</a></li>
-        <li><a class="waves-effect carrega" href="{% url 'fococalor' %}"><i class="material-icons">visibility</i>Visualização
-            termica</a></li>
+        <li><a class="waves-effect" href="#!" id="vizualizar_chamado"><i class="material-icons">person_pin</i>Bairros</a></li>
+        <li><a class="waves-effect carrega" href="{% url 'fococalor' %}"><i class="material-icons">visibility</i>Vizualizar situação</a></li>
 
-        <li><a class="waves-effect ocorrencias-periodo" href="#ocorrencias-tempo"><i class="material-icons">av_timer</i>Ocorrências
-            por período</a></li>
+{#        <li><a class="waves-effect ocorrencias-periodo" href="#ocorrencias-tempo"><i class="material-icons">av_timer</i>Ocorrências#}
+{#            por período</a></li>#}
 
 
     {% else %}
@@ -51,6 +49,7 @@
     </li>
 
     {% if user.is_authenticated %}
+        <li> <a class="waves-effect carrega " id="abrigos-ver" href="#"><i class="material-icons left">add_location</i>Abrigos</a></li>
         <li><a class="waves-effect carrega" href="{% url 'logout' %}">Sair</a></li>
     {% endif %}
 

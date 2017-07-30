@@ -14,6 +14,8 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import simplejson
 from mapa_app.models import *
+import urllib.request
+import json
 # from django.utils import simplejson
 
 # Create your views here.
@@ -21,13 +23,20 @@ from mapa_app.models import *
 def listar_pontos(request):
     pontos = Local.objects.all()
     email = hashlib.md5(request.user.email.encode('utf-8')).hexdigest()
-    # parametro = urllib.parse.urlencode({'d': default, 's': str(200)})
+    req = urllib.request.urlopen('http://iot-acre.mybluemix.net/api/acre4')
+    jsonstr = req.read()
+    json_obj = json.loads(jsonstr)
+    ultimo = json_obj[-1]
     return render(request, 'lista_pontos.html', locals())
 
 
 @login_required
 def chamados(request):
     pontos = Local.objects.all()
+    req = urllib.request.urlopen('http://iot-acre.mybluemix.net/api/acre4')
+    jsonstr = req.read()
+    json_obj = json.loads(jsonstr)
+    ultimo = json_obj[-1]
     return render(request, 'chamados.html', locals())
 
 
@@ -106,3 +115,21 @@ def login_app(request):
         return HttpResponse(u'Por favor, insira um usuário e senha corretos.')
 
 
+@login_required
+def cad_abrigo(request):
+    abrigos = Abrigo.objects.all()
+    email = hashlib.md5(request.user.email.encode('utf-8')).hexdigest()
+    return render(request, 'cad_abrigos.html', locals())
+
+
+@login_required
+def detalhe_abrigo(request):
+    codabrigo = request.GET.get('cod')
+    abrigo = Abrigo.objects.filter(id=codabrigo)
+    desabrigados = Abrirelaciona.objects.filter(codabrigo__pk=request.GET['cod'])
+    quantidade = desabrigados.count()
+    return render(request, 'det-abrigos.html', locals())
+
+@login_required
+def cota_atual(request):
+    return render(request, 'base.json', locals())

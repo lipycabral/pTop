@@ -28,6 +28,9 @@ urlpatterns = [
     url(r'^login_app/', views.login_app, name='login_app'),
     url(r'^logout/', views.deslogar, name='logout'),
     url(r'^addchamado/', views.abrir_chamado, name='addchamado'),
+    url(r'^cad-abrigo/', views.cad_abrigo, name='cad-abrigo'),
+    url(r'^det-abrigo/', views.detalhe_abrigo, name='det-abrigo'),
+    url(r'^cota-atual/', views.cota_atual, name='cota-atual'),
     url(r'^$', views.listar_pontos, name='index'),
 
 ]

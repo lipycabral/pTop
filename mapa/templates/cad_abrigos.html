@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="fechar" onclick="fechar()">
+        <i class="close material-icons">close</i>Fechar
+    </div>
+    <h1>Abrigos</h1>
+
+    <div class="row">
+        <div class="col s12">
+            <div class="col s4">
+                <a class="waves-effect waves-light btn-large botao-clean" href="#cad-abrigo"><i
+                        class="material-icons left">add_circle_outline</i>Novo abrigo</a>
+            </div>
+            <div class="col s8">
+                <input type="text" class="botao-clean" placeholder="Digite o nome do abrigo" id="busca-campo">
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12">
+        <div class="row">
+            <ul id="item-lista">
+                {% for i in abrigos %}
+                    <li>
+                        <div class="col s3">
+                            <div class="card indigo darken-2  grey-text text-lighten-4">
+                                <div class="card-content center-align">
+                                    <h1 style="margin-bottom: 0; font-weight: 800">{{ i.espaco }}</h1>
+                                    <h6 style="margin-top: 0">Vagas</h6>
+                                </div>
+                                <div class="card-action indigo-text text-darken-4 center-align">
+                                    <a href="det-abrigo?cod={{ i.id }}" style="padding: 0; margin: 0" class="indigo-text text-darken-4">
+                                        <h5 style="font-weight: 800; text-transform: capitalize">{{ i.titulo }} <i
+                                                class="material-icons right">keyboard_arrow_right</i></h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    //busca
+    $(document).ready(function () {
+        $("#busca-campo").keyup(function () {
+            var texto = $(this).val();
+            $("#item-lista li").css("display", "block");
+            $("#item-lista li").each(function () {
+                if ($(this).text().indexOf(texto) < 0)
+                    $(this).attr("style", "display: none !important");
+            });
+        });
+    });
+
+</script>

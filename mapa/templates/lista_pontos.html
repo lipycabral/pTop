@@ -23,7 +23,6 @@
 
 <script type="text/javascript">
 function initMap() {
-
     var styledMapType = new google.maps.StyledMapType(
             [
                 {
@@ -309,25 +308,41 @@ function initMap() {
 
     });
     var lastUsed = 0;
+
     {% for i in pontos %}
-        var image = "{% static 'ponto.png' %}";
+        {% if ultimo.nivel > i.altura %}
+            var image = "{% static 'ponto.png' %}";
+        {% else %}
+            var image = "{% static 'ponto_verde.png' %}";
+        {% endif %}
         var a{{i.id}} = new google.maps.Marker({
             position: {lat: {{i.latitude}}, lng: {{i.longitude}}},
             map: map,
             title: "{{i.titulo}}",
-            content: "prefcam, prefeitura do campus",
+            content: "",
             icon: image,
             animation: google.maps.Animation.DROP
         });
 
         <!--marcador-->
-        var b{{i.id}} = new google.maps.InfoWindow({
+	    {% if ultimo.nivel > i.altura %}
+            var b{{i.id}} = new google.maps.InfoWindow({
             maxWidth: 300,
             content: "<div class='row' style='text-align: center'></div>" +
                     "<div class='card-content'>" +
-                    "<p><h4>{{i.titulo}} </h4><h6><strong>Cota de Alerta:</strong> {{ i.altura }}</h6></p></div><div class='card-action'>" +
+                    "<p><h4>{{i.titulo}}</h4><h6><strong>Cota de Alerta:</strong> {{ i.altura }}<sup>cm</sup></h6><h6><strong>Cota Atual:</strong> {{ ultimo.nivel }}<sup>cm</sup></h6></p></div><div class='card-action'>" +
+                    "<a class='waves-effect waves-light btn  red lighten-1 total '><i class='material-icons left'>error_outline</i>Emitir alerta</a>" +
+                    " </div>"});
+        {% else %}
+            var b{{i.id}} = new google.maps.InfoWindow({
+            maxWidth: 300,
+            content: "<div class='row' style='text-align: center'></div>" +
+                    "<div class='card-content'>" +
+                    "<p><h4>{{i.titulo}}</h4><h6><strong>Cota de Alerta:</strong> {{ i.altura }}<sup>cm</sup></h6><h6><strong>Cota Atual:</strong> {{ ultimo.nivel }}<sup>cm</sup></h6></p></div><div class='card-action'>" +
                     "<a class='waves-effect waves-light btn  red lighten-1 total disabled '><i class='material-icons left'>error_outline</i>Emitir alerta</a>" +
                     " </div>"});
+        {% endif %}
+
 
         a{{i.id}}.addListener('click', function () {
             if (lastUsed)  lastUsed.close();
@@ -347,4 +362,5 @@ function initMap() {
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJRzaJB3fABbEFRmxnejgpNUzD0_9TLto&libraries=visualization&callback=initMap">
 </script>
+
 {% include 'footer.html' %}

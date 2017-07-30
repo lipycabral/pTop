@@ -1,0 +1,41 @@
+{% load static %}
+{% include 'head.html' %}
+{% include 'menu.html' %}
+
+
+
+{% for i in abrigo %}
+
+    <div class="card cyan center-align cyan-text text-darken-4">
+        <div class="card-content">
+            <h1 style="text-transform: uppercase; padding: 0; font-weight: 800">Abrigo: {{ i.titulo }}</h1>
+            <h4 style="text-transform: uppercase; padding: 0;">Vagas: {{ i.espaco }}</h4>
+        </div>
+    </div>
+
+{% endfor %}
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col s12">
+            <ul class="collection with-header" style="text-transform: uppercase">
+                <li class="collection-header">
+                    <h4>Pessoas neste abrigo</h4>
+                    <p>
+                        <h6>Quantidade de pessoas: {{ quantidade }}</h6>
+                    </p>
+                </li>
+                {% for d in desabrigados %}
+                    <li class="collection-item"> {{ d.codusuario }}</li>
+                {% endfor %}
+
+
+
+        </div>
+    </div>
+</div>
+
+
+{% include 'footer.html' %}
