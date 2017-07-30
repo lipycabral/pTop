@@ -1,0 +1,85 @@
+<ul id="slide-out" class="side-nav">
+    <li>
+        <div class="userView">
+            <div class="background cyan darken-1">
+                {#                <img src="http://sistemas.ufac.br/mapa/img/ufac.jpg">#}
+            </div>
+            <a href="#!user"><img class="circle avatar"
+                                  src="https://www.gravatar.com/avatar/{{ email }}?{{ parametro }}"></a>
+            <a href="#!name"><span
+                    class="white-text name"><h5>{{ request.user.first_name }} {{ request.user.last_name }}</h5></span></a>
+            <a href="#!email"><span class="white-text email">{{ request.user.email }}</span></a>
+        </div>
+    </li>
+
+    {#  verifica se está na pagina inicial#}
+    {% if request.path == "/" %}
+        <li><a class="waves-effect" href="#!" id="vizualizar_chamado"><i class="material-icons">person_pin</i>Vizualizar
+            chamados</a></li>
+        <li><a class="waves-effect carrega" href="{% url 'fococalor' %}"><i class="material-icons">visibility</i>Visualização
+            termica</a></li>
+
+        <li><a class="waves-effect ocorrencias-periodo" href="#ocorrencias-tempo"><i class="material-icons">av_timer</i>Ocorrências
+            por período</a></li>
+
+
+    {% else %}
+        <li><a class="waves-effect" href="{% url 'index' %}"><i class="material-icons">home</i>Voltar ao início</a></li>
+    {% endif %}
+
+    <a href="#" id="menu" data-activates="slide-out" class="button-collapse bt-home"><i class="material-icons">menu</i></a>
+
+
+    {# menu foco calor#}
+    {% if request.path == "/fococalor" %}
+        <div class="grey lighten-3">
+            <li>
+                <div class="divider"></div>
+            </li>
+            <li><a class="waves-effect" href="#!"><h5>Configurações</h5></a></li>
+            <li><a class="waves-effect" href="#!" onclick="toggleHeatmap()"><i class="material-icons">visibility_off</i>Ocultar/mostrar</a>
+            </li>
+            <li><a class="waves-effect" href="#!" onclick="changeGradient()"><i class="material-icons">invert_colors</i>Mudar
+                Gradiente</a></li>
+            <li><a class="waves-effect" href="#!" onclick="changeRadius()"><i class="material-icons">add_circle</i>Aumentar
+                realce</a></li>
+            <li><a class="waves-effect" href="#!" onclick="changeOpacity()"><i class="material-icons">gradient</i>Opacidade</a></li>
+        </div>
+    {% endif %}
+    <li>
+        <div class="divider"></div>
+    </li>
+
+    {% if user.is_authenticated %}
+        <li><a class="waves-effect carrega" href="{% url 'logout' %}">Sair</a></li>
+    {% endif %}
+
+
+</ul>
+
+
+{#modal ocorrencias#}
+<!-- Modal Structure -->
+<form method="GET" action="/relatorio_data">
+    <div id="ocorrencias-tempo" class="modal">
+        <div class="modal-content">
+            <h4>Selecione o período</h4>
+
+            <div class="row">
+                <div class="col s6">
+                    <label>Data inicial</label>
+                    <input type="date" placeholder="Escolha a data inicial" name="datainicial" required="true">
+                </div>
+                <div class="col s6">
+                    <label>Data inicial</label>
+                    <input type="date" placeholder="Escolha a data Final" name="datafinal" required="true">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+{#            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Gerar relatório</a>#}
+            <button type="submit" class="modal-action waves-effect waves-green btn-flat">Gerar relatório</button>
+        </div>
+    </div>
+</form>
+{#modal ocorrencias#}

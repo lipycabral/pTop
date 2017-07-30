@@ -1,0 +1,27 @@
+{% if user.is_authenticated %}
+Login is required
+{% endif %}
+
+{% include 'head.html' %}
+<div class="container">
+    <div class="log-row">
+        <div class="z-depth-1 login-form">
+            <div style="width: 100%;">
+                <h5>Iniciar sessão</h5>
+
+                <form role="form" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Usuário" name="usuario" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Senha" name="senha" type="password" value="">
+                    </div>
+                    <!-- Change this to a button or input when using this as a form -->
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Acessar" style="width: 100%">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}
